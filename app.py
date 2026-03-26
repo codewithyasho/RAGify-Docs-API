@@ -1,8 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from main import main
 import os
@@ -23,7 +21,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+# app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 
 # schema for user input
@@ -36,13 +34,7 @@ class UserInput(BaseModel):
 
 @app.get("/")
 def home():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    html_file = os.path.join(base_dir, "frontend", "index.html")
-
-    if os.path.exists(html_file):
-        return FileResponse(html_file)
-
-    return {"message": "Frontend not found"}
+    return {"message": "Welcome to the RAGify Docs API! Use the /ragify endpoint to ask questions about documentation."}
 
 
 rag_cache = {}
