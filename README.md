@@ -1,4 +1,4 @@
-# 📚 RAGify Docs API
+# 📚 RAGify Docs API & MCP Server
 
 <div align="center">
 
